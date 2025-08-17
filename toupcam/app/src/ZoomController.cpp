@@ -120,10 +120,10 @@ QRectF ZoomController::getVisibleRectInImage() const
     QRectF visible = getVisibleRect();
     
     // Clamp to image bounds
-    float left = std::max(0.0f, visible.left());
-    float top = std::max(0.0f, visible.top());
-    float right = std::min(static_cast<float>(m_imageSize.width()), visible.right());
-    float bottom = std::min(static_cast<float>(m_imageSize.height()), visible.bottom());
+    qreal left = std::max(0.0, visible.left());
+    qreal top = std::max(0.0, visible.top());
+    qreal right = std::min(static_cast<qreal>(m_imageSize.width()), visible.right());
+    qreal bottom = std::min(static_cast<qreal>(m_imageSize.height()), visible.bottom());
     
     return QRectF(left, top, right - left, bottom - top);
 }
@@ -188,8 +188,8 @@ void ZoomController::updatePanLimits()
 
 void ZoomController::clampPan()
 {
-    m_panPosition.setX(std::clamp(m_panPosition.x(), m_minPan.x(), m_maxPan.x()));
-    m_panPosition.setY(std::clamp(m_panPosition.y(), m_minPan.y(), m_maxPan.y()));
+    m_panPosition.setX(std::clamp<qreal>(m_panPosition.x(), m_minPan.x(), m_maxPan.x()));
+    m_panPosition.setY(std::clamp<qreal>(m_panPosition.y(), m_minPan.y(), m_maxPan.y()));
 }
 
 float ZoomController::clampZoom(float zoom) const

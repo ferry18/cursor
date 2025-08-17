@@ -6,6 +6,7 @@
 #include <QDateTime>
 #include <QMatrix4x4>
 #include <cmath>
+#include <QtGlobal>
 
 // Vertex shader for texture rendering
 static const char *vertexShaderSource = R"(
@@ -270,10 +271,16 @@ void CameraWidget::wheelEvent(QWheelEvent *event)
     float delta = event->angleDelta().y();
     bool toCursor = event->modifiers() & Qt::ControlModifier;
     
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    QPointF pos = event->position();
+#else
+    QPointF pos = event->posF();
+#endif
+    
     if (delta > 0) {
-        m_zoomController->zoomIn(event->position(), toCursor);
+        m_zoomController->zoomIn(pos, toCursor);
     } else if (delta < 0) {
-        m_zoomController->zoomOut(event->position(), toCursor);
+        m_zoomController->zoomOut(pos, toCursor);
     }
 }
 
