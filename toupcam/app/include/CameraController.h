@@ -13,9 +13,6 @@ extern "C" {
 #include "toupcam.h"
 }
 
-struct ToupcamFrameInfoV3;
-struct ToupcamFrameInfoV4;
-
 class FrameWriter;
 
 class CameraController : public QObject {
