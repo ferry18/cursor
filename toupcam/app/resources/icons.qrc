@@ -1,0 +1,20 @@
+<RCC>
+	<qresource prefix="/icons">
+		<file>../icons/shutter_button/shutter_button_not_pressed.svg</file>
+		<file>../icons/shutter_button/shutter_button_pressed.svg</file>
+		<file>../icons/record_button/record_button_not_pressed.svg</file>
+		<file>../icons/record_button/record_button_pressed.svg</file>
+		<file>../icons/gain_switch/gain_switch_LCG.svg</file>
+		<file>../icons/gain_switch/gain_switch_HCG.svg</file>
+		<file>../icons/high-full_well_button/high_full_well_0.svg</file>
+		<file>../icons/high-full_well_button/high_full_well_1.svg</file>
+		<file>../icons/heating_button/heating_button_level_0.svg</file>
+		<file>../icons/heating_button/heating_button_level_1.svg</file>
+		<file>../icons/heating_button/heating_button_level_2.svg</file>
+		<file>../icons/heating_button/heating_button_level_3.svg</file>
+		<file>../icons/cooling_button/cooling_button_level_0.svg</file>
+		<file>../icons/cooling_button/cooling_button_level_1.svg</file>
+		<file>../icons/cooling_button/cooling_button_level_2.svg</file>
+		<file>../icons/cooling_button/cooling_button_level_3.svg</file>
+	</qresource>
+</RCC>
