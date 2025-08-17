@@ -6,6 +6,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
+# Set AUTOGEN build directory to avoid path issues
+set(CMAKE_AUTOGEN_BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/autogen)
+
 # Find Qt6
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets OpenGL OpenGLWidgets)
 
@@ -37,6 +40,11 @@ set(RESOURCES
 
 # Create executable
 add_executable(toupcam_app ${SOURCES} ${HEADERS} ${RESOURCES})
+
+# Set resource file property to handle special characters
+set_source_files_properties(${RESOURCES} PROPERTIES 
+    AUTORCC_OPTIONS "--no-compress"
+)
 
 # Include directories
 target_include_directories(toupcam_app PRIVATE 
