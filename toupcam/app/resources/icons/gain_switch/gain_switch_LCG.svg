@@ -1,0 +1,6 @@
+<svg width="250" height="100" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif" font-weight="bold" font-size="40">
+      <rect x="0" y="0" width="250" height="100" rx="20" ry="20" fill="#C6C6C8"/>
+      <rect x="5" y="5" width="120" height="90" rx="15" ry="15" fill="white"/>
+      <text x="65" y="62" text-anchor="middle" fill="black">LCG</text>
+      <text x="185" y="62" text-anchor="middle" fill="#555555">HCG</text>
+    </svg>
