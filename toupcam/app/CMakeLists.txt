@@ -6,6 +6,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
+# Disable AUTORCC and handle resources manually to avoid path issues
+set(CMAKE_AUTORCC OFF)
+
 # Set AUTOGEN build directory to avoid path issues
 set(CMAKE_AUTOGEN_BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/autogen)
 
@@ -16,10 +19,12 @@ option(USE_QT5 "Use Qt5 instead of Qt6" OFF)
 if(USE_QT5)
     find_package(Qt5 REQUIRED COMPONENTS Core Widgets)
     set(QT_LIBRARIES Qt5::Core Qt5::Widgets)
+    set(QT_RCC_EXECUTABLE ${Qt5Core_RCC_EXECUTABLE})
     message(STATUS "Using Qt5")
 else()
     find_package(Qt6 REQUIRED COMPONENTS Core Widgets OpenGL OpenGLWidgets)
     set(QT_LIBRARIES Qt6::Core Qt6::Widgets Qt6::OpenGL Qt6::OpenGLWidgets)
+    set(QT_RCC_EXECUTABLE ${Qt6Core_RCC_EXECUTABLE})
     message(STATUS "Using Qt6")
 endif()
 
@@ -44,23 +49,35 @@ set(HEADERS
     src/utils.h
 )
 
-# Resources
-set(RESOURCES
-    resources/resources.qrc
+# Handle resources manually
+set(QRC_FILE ${CMAKE_CURRENT_SOURCE_DIR}/resources/resources.qrc)
+set(QRC_OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/qrc_resources.cpp)
+
+# Custom command to run rcc with proper escaping
+add_custom_command(
+    OUTPUT ${QRC_OUTPUT}
+    COMMAND ${QT_RCC_EXECUTABLE}
+    ARGS -name resources -o "${QRC_OUTPUT}" "${QRC_FILE}"
+    DEPENDS ${QRC_FILE}
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    COMMENT "Generating resources..."
+    VERBATIM
 )
+
+# Add generated resource file to sources
+list(APPEND SOURCES ${QRC_OUTPUT})
 
 # Create executable
-add_executable(toupcam_app ${SOURCES} ${HEADERS} ${RESOURCES})
+add_executable(toupcam_app ${SOURCES} ${HEADERS})
 
-# Set resource file property to handle special characters
-set_source_files_properties(${RESOURCES} PROPERTIES 
-    AUTORCC_OPTIONS "--no-compress"
-)
+# Force MOC to run on headers
+set_target_properties(toupcam_app PROPERTIES AUTOMOC ON)
 
 # Include directories
 target_include_directories(toupcam_app PRIVATE 
     ${CMAKE_CURRENT_SOURCE_DIR}/src
     ${CMAKE_CURRENT_SOURCE_DIR}/../toupcamsdk/inc
+    ${CMAKE_CURRENT_BINARY_DIR}
 )
 
 # Link libraries
