@@ -1,0 +1,2 @@
+set(__QT_DEPLOY_TARGET_ToupcamApp_FILE /workspace/toupcam/app/build/ToupcamApp)
+set(__QT_DEPLOY_TARGET_ToupcamApp_TYPE EXECUTABLE)
