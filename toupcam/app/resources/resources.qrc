@@ -1,0 +1,32 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/icons">
+        <!-- Shutter button -->
+        <file alias="shutter_not_pressed">../../icons/shutter_button/shutter_button_not_pressed.svg</file>
+        <file alias="shutter_pressed">../../icons/shutter_button/shutter_button_pressed.svg</file>
+        
+        <!-- Record button -->
+        <file alias="record_not_pressed">../../icons/record_button/record_button_not_pressed.svg</file>
+        <file alias="record_pressed">../../icons/record_button/record_button_pressed.svg</file>
+        
+        <!-- Gain switch -->
+        <file alias="gain_lcg">../../icons/gain_switch/gain_switch_LCG.svg</file>
+        <file alias="gain_hcg">../../icons/gain_switch/gain_switch_HCG.svg</file>
+        
+        <!-- High full well -->
+        <file alias="high_full_well_0">../../icons/high-full_well_button/high_full_well_0.svg</file>
+        <file alias="high_full_well_1">../../icons/high-full_well_button/high_full_well_1.svg</file>
+        
+        <!-- Heating button -->
+        <file alias="heating_0">../../icons/heating_button/heating_button_level_0.svg</file>
+        <file alias="heating_1">../../icons/heating_button/heating_button_level_1.svg</file>
+        <file alias="heating_2">../../icons/heating_button/heating_button_level_2.svg</file>
+        <file alias="heating_3">../../icons/heating_button/heating_button_level_3.svg</file>
+        
+        <!-- Cooling button -->
+        <file alias="cooling_0">../../icons/cooling_button/cooling_button_level_0.svg</file>
+        <file alias="cooling_1">../../icons/cooling_button/cooling_button_level_1.svg</file>
+        <file alias="cooling_2">../../icons/cooling_button/cooling_button_level_2.svg</file>
+        <file alias="cooling_3">../../icons/cooling_button/cooling_button_level_3.svg</file>
+    </qresource>
+</RCC>
