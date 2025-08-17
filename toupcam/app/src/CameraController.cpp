@@ -80,7 +80,7 @@ void CameraController::close()
 bool CameraController::start()
 {
 	if (!m_isOpen || m_isStreaming) return false;
-	setupCallbacks();
+	// do not call setupCallbacks; pass lambdas directly
 	HRESULT hr = Toupcam_StartPushModeV4(m_hcam,
 		[](const void* pData, const ToupcamFrameInfoV3* pInfo, int bSnap, void* ctxData){
 			CameraController* self = reinterpret_cast<CameraController*>(ctxData);
@@ -94,7 +94,16 @@ bool CameraController::start()
 		reinterpret_cast<void*>(this)
 	);
 	if (FAILED(hr)) {
+		emit errorRaised("Toupcam_StartPushModeV4 failed");
 		return false;
+	}
+	// After starting, ensure final size and allocate buffer once
+	queryFinalSize();
+	{
+		QMutexLocker lock(&m_frameMutex);
+		if (!m_frameBuffer && !m_finalSize.isEmpty()) {
+			m_frameBuffer.reset(new uchar[m_finalSize.width() * m_finalSize.height()]);
+		}
 	}
 	m_isStreaming = true;
 	return true;
@@ -184,8 +193,8 @@ bool CameraController::setHfwOffDefault()
 bool CameraController::configureLowLatencyPipeline()
 {
 	Toupcam_put_RealTime(m_hcam, 1);
-	Toupcam_put_Option(m_hcam, TOUPCAM_OPTION_BACKEND_DEQUE_LENGTH, 3);
-	Toupcam_put_Option(m_hcam, TOUPCAM_OPTION_FRONTEND_DEQUE_LENGTH, 4);
+	Toupcam_put_Option(m_hcam, TOUPCAM_OPTION_BACKEND_DEQUE_LENGTH, 2);
+	Toupcam_put_Option(m_hcam, TOUPCAM_OPTION_FRONTEND_DEQUE_LENGTH, 2);
 	Toupcam_put_Option(m_hcam, TOUPCAM_OPTION_CALLBACK_THREAD, 1);
 	return true;
 }
@@ -342,7 +351,7 @@ void CameraController::onFrameCallback(const void* pData, const ToupcamFrameInfo
 		m_writer->saveStill(raw, json);
 	}
 	
-	// Recording queue
+	// Recording queue (reuse frame memory per item by immediate copy only)
 	if (m_isRecording) {
 		QByteArray raw;
 		raw.resize(w * h);

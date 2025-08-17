@@ -6,6 +6,7 @@
 #include <QPainter>
 #include <QtMath>
 #include <QOpenGLFunctions>
+#include <QOpenGLContext>
 
 GLCameraView::GLCameraView(QWidget* parent)
 	: QOpenGLWidget(parent)
@@ -69,6 +70,7 @@ void GLCameraView::clearAeSpot()
 void GLCameraView::initializeGL()
 {
 	initializeOpenGLFunctions();
+	if (!context() || !context()->isValid()) return;
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_BLEND);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
