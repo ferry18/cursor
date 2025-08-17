@@ -6,6 +6,7 @@
 #include <QMutex>
 #include <QAtomicInteger>
 #include <QSize>
+#include <QElapsedTimer>
 #include <memory>
 
 extern "C" {
