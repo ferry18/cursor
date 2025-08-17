@@ -4,7 +4,9 @@
 #include <QtCore>
 #include <QtWidgets>
 #include <QtOpenGL>
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QtOpenGLWidgets>
+#endif
 #include <QPropertyAnimation>
 #include <QEasingCurve>
 #include <QGraphicsOpacityEffect>

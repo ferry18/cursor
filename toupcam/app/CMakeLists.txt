@@ -9,8 +9,19 @@ set(CMAKE_AUTORCC ON)
 # Set AUTOGEN build directory to avoid path issues
 set(CMAKE_AUTOGEN_BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/autogen)
 
-# Find Qt6
-find_package(Qt6 REQUIRED COMPONENTS Core Widgets OpenGL OpenGLWidgets)
+# Option to use Qt5
+option(USE_QT5 "Use Qt5 instead of Qt6" OFF)
+
+# Find Qt
+if(USE_QT5)
+    find_package(Qt5 REQUIRED COMPONENTS Core Widgets)
+    set(QT_LIBRARIES Qt5::Core Qt5::Widgets)
+    message(STATUS "Using Qt5")
+else()
+    find_package(Qt6 REQUIRED COMPONENTS Core Widgets OpenGL OpenGLWidgets)
+    set(QT_LIBRARIES Qt6::Core Qt6::Widgets Qt6::OpenGL Qt6::OpenGLWidgets)
+    message(STATUS "Using Qt6")
+endif()
 
 # Source files
 set(SOURCES
@@ -54,12 +65,15 @@ target_include_directories(toupcam_app PRIVATE
 
 # Link libraries
 target_link_libraries(toupcam_app
-    Qt6::Core
-    Qt6::Widgets
-    Qt6::OpenGL
-    Qt6::OpenGLWidgets
+    ${QT_LIBRARIES}
     ${CMAKE_CURRENT_SOURCE_DIR}/../toupcamsdk/linux/arm64/libtoupcam.so
 )
+
+# For Qt5, we need to handle OpenGL differently
+if(USE_QT5)
+    find_package(OpenGL REQUIRED)
+    target_link_libraries(toupcam_app ${OPENGL_LIBRARIES})
+endif()
 
 # Set RPATH for runtime library loading
 set_target_properties(toupcam_app PROPERTIES

@@ -14,8 +14,8 @@
         <file alias="gain_hcg">../../icons/gain_switch/gain_switch_HCG.svg</file>
         
         <!-- High full well -->
-        <file alias="high_full_well_0">../../icons/high-full_well_button/high_full_well_0.svg</file>
-        <file alias="high_full_well_1">../../icons/high-full_well_button/high_full_well_1.svg</file>
+        <file alias="high_full_well_0">../../icons/high_full_well_button/high_full_well_0.svg</file>
+        <file alias="high_full_well_1">../../icons/high_full_well_button/high_full_well_1.svg</file>
         
         <!-- Heating button -->
         <file alias="heating_0">../../icons/heating_button/heating_button_level_0.svg</file>

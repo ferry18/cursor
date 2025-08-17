@@ -2,7 +2,12 @@
 #define IMAGE_VIEW_H
 
 #include "utils.h"
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QOpenGLWidget>
+#else
+#include <QGLWidget>
+#define QOpenGLWidget QGLWidget
+#endif
 #include <QOpenGLFunctions>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLTexture>
