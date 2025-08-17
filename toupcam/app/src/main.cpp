@@ -16,9 +16,8 @@ int main(int argc, char* argv[]) {
     app.setApplicationName("Toupcam ATR2600M");
     app.setOrganizationName("ToupcamApp");
     
-    // Enable high DPI support
-    app.setAttribute(Qt::AA_EnableHighDpiScaling);
-    app.setAttribute(Qt::AA_UseHighDpiPixmaps);
+    // High DPI support is enabled by default in Qt6
+    // No need to set AA_EnableHighDpiScaling or AA_UseHighDpiPixmaps
     
     // Create and show main window
     AppMainWindow window;

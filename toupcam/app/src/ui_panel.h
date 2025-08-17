@@ -14,6 +14,9 @@ public:
 signals:
     void shutterClicked();
     
+public slots:
+    void updateCameraState();
+    
 private slots:
     void onShutterClicked();
     void onRecordToggled();
@@ -23,7 +26,6 @@ private slots:
     void onHeatingCycled();
     
     void updateRecordingState(bool recording);
-    void updateCameraState();
     
 private:
     QToolButton* createIconButton(const QString& iconPath, const QString& tooltip);

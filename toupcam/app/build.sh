@@ -34,5 +34,8 @@ echo -e "${YELLOW}Important: Make sure to install udev rules before running:${NC
 echo "sudo cp ../toupcamsdk/linux/udev/99-toupcam.rules /etc/udev/rules.d/"
 echo "sudo udevadm control --reload && sudo udevadm trigger"
 echo ""
+echo -e "${YELLOW}Also ensure Qt6 is installed:${NC}"
+echo "sudo apt install qt6-base-dev libqt6opengl6-dev"
+echo ""
 echo -e "${GREEN}To run the application:${NC}"
 echo "./toupcam_app"
