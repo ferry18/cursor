@@ -8,8 +8,9 @@
 #include <QSize>
 #include <memory>
 
-// Forward declare SDK handle
-typedef struct Toupcam_t { int unused; } *HToupcam;
+extern "C" {
+#include "toupcam.h"
+}
 
 struct ToupcamFrameInfoV3;
 struct ToupcamFrameInfoV4;

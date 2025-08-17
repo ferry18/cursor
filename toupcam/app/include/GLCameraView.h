@@ -7,6 +7,7 @@
 #include <QOpenGLVertexArrayObject>
 #include <QMatrix4x4>
 #include <QTimer>
+#include <QElapsedTimer>
 #include <QPointF>
 #include <QRectF>
 
