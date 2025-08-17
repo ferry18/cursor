@@ -42,7 +42,7 @@ set(TOUPCAM_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/../toupcamsdk/inc")
 # Prefer absolute path per workspace layout
 set(TOUPCAM_LIB_DIR "/workspace/toupcam/toupcamsdk/linux/arm64/")
 
-include_directories(${TOUPCAM_INCLUDE_DIR})
+include_directories(${TOUPCAM_INCLUDE_DIR} ${CMAKE_SOURCE_DIR}/include)
 link_directories(${TOUPCAM_LIB_DIR})
 
 # Link Qt6 and toupcam shared lib
